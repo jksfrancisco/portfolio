@@ -89,7 +89,7 @@ export default function Contact() {
             variants={itemVariants}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            Have a project in mind? Let's work together to bring your ideas to life
+            Have a project in mind? Let&apos;s work together to bring your ideas to life
           </motion.p>
         </motion.div>
 
@@ -105,7 +105,7 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle>Send a Message</CardTitle>
                 <CardDescription>
-                  Fill out the form below and I'll get back to you as soon as possible
+                  Fill out the form below and I&apos;ll get back to you as soon as possible
                 </CardDescription>
               </CardHeader>
               <CardContent>

@@ -91,13 +91,13 @@ export default function About() {
             <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
             <p className="text-muted-foreground leading-relaxed">
               With a strong foundation in computer science and years of hands-on experience,
-              I've developed a deep passion for creating elegant solutions to complex problems.
+              I&apos;ve developed a deep passion for creating elegant solutions to complex problems.
               My journey in software engineering has been driven by curiosity and a commitment
               to continuous learning.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               I specialize in full-stack development, with expertise in modern frameworks and
-              technologies. Whether it's building responsive web applications, optimizing performance,
+              technologies. Whether it&apos;s building responsive web applications, optimizing performance,
               or architecting scalable systems, I bring dedication and creativity to every project.
             </p>
           </motion.div>
