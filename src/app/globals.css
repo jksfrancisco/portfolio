@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 217 91% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 97%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 35%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 30% 10%;
+    --foreground: 210 20% 88%;
+    --card: 220 25% 14%;
+    --card-foreground: 210 20% 88%;
+    --popover: 220 25% 14%;
+    --popover-foreground: 210 20% 88%;
+    --primary: 210 30% 45%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 88%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 215 15% 60%;
+    --accent: 220 20% 20%;
+    --accent-foreground: 210 20% 88%;
+    --destructive: 0 50% 40%;
+    --destructive-foreground: 210 20% 88%;
+    --border: 220 20% 22%;
+    --input: 220 20% 22%;
+    --ring: 210 30% 45%;
+  }
+}
+
+/* Tech Grid Background */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.dark .tech-grid {
+  background-image:
+    linear-gradient(rgba(96, 165, 250, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Tech Dots Background */
+.tech-dots {
+  background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .tech-dots {
+  background-image: radial-gradient(rgba(96, 165, 250, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
