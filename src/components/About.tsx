@@ -107,7 +107,7 @@ export default function About() {
             variants={itemVariants}
             className="flex items-center justify-center"
           >
-            <div className="relative w-full aspect-square max-w-md rounded-lg overflow-hidden border border-primary/30 bg-primary/5">
+            <div className="relative w-full aspect-square max-w-md rounded-lg overflow-hidden">
               <Image
                 src="/asset/img/1761879662817.png"
                 alt="James Francisco - Profile"
