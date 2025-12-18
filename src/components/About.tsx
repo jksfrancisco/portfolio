@@ -107,7 +107,13 @@ export default function About() {
             variants={itemVariants}
             className="flex items-center justify-center"
           >
-            <div className="relative w-full aspect-square max-w-md rounded-lg overflow-hidden">
+            <div
+              className="relative w-full aspect-square max-w-md rounded-lg overflow-hidden"
+              style={{
+                maskImage: 'linear-gradient(to bottom, black 60%, transparent 70%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 70%)'
+              }}
+            >
               <Image
                 src="/asset/img/1761879662817.png"
                 alt="James Francisco - Profile"
