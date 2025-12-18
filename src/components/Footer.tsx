@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Heart } from "lucide-react"
+import { Linkedin, Mail } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -42,17 +42,7 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Connect</h4>
             <div className="flex gap-4">
               <motion.a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors"
-              >
-                <Github size={20} />
-              </motion.a>
-              <motion.a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/james-f-b802a0319"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -62,7 +52,7 @@ export default function Footer() {
                 <Linkedin size={20} />
               </motion.a>
               <motion.a
-                href="mailto:james@example.com"
+                href="mailto:jf2023kheil@gmail.com"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors"
@@ -75,15 +65,8 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-8 border-t border-border text-center">
-          <p className="text-muted-foreground flex items-center justify-center gap-2">
-            © {currentYear} James Francisco. Made with
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <Heart size={16} className="text-red-500 fill-red-500" />
-            </motion.span>
-            and Next.js
+          <p className="text-muted-foreground">
+            © {currentYear} James Francisco.
           </p>
         </div>
       </div>

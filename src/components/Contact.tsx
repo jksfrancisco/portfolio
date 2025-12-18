@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
-import { Mail, MapPin, Phone, Send } from "lucide-react"
+import { Mail, MapPin, Send } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -15,6 +15,11 @@ export default function Contact() {
     email: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({ type: null, message: "" })
 
   useEffect(() => {
     if (isInView) {
@@ -41,31 +46,55 @@ export default function Contact() {
     },
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formState)
-    // Reset form
-    setFormState({ name: "", email: "", message: "" })
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: "" })
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: data.message || "Message sent successfully!",
+        })
+        setFormState({ name: "", email: "", message: "" })
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        })
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred. Please try again later.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email",
-      value: "james.francisco@example.com",
-      href: "mailto:james.francisco@example.com",
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "jf2023kheil@gmail.com",
+      href: "mailto:jf2023kheil@gmail.com",
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "San Francisco, CA",
+      value: "Philippines",
       href: null,
     },
   ]
@@ -169,11 +198,25 @@ export default function Contact() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.5 }}
                   >
-                    <Button type="submit" size="lg" className="w-full">
+                    <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                       <Send size={18} className="mr-2" />
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </motion.div>
+
+                  {submitStatus.type && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`mt-4 p-4 rounded-md ${
+                        submitStatus.type === "success"
+                          ? "bg-green-500/10 text-green-600 border border-green-500/20"
+                          : "bg-red-500/10 text-red-600 border border-red-500/20"
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </motion.div>
+                  )}
                 </form>
               </CardContent>
             </Card>
@@ -212,40 +255,6 @@ export default function Contact() {
                 </motion.div>
               ))}
             </div>
-
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="relative h-64 rounded-lg overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 180, 360],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="w-32 h-32 border-4 border-primary/30 rounded-full"
-                />
-                <motion.div
-                  animate={{
-                    scale: [1.2, 1, 1.2],
-                    rotate: [360, 180, 0],
-                  }}
-                  transition={{
-                    duration: 15,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute w-24 h-24 border-4 border-purple-500/30 rounded-full"
-                />
-              </div>
-            </motion.div>
           </motion.div>
         </motion.div>
       </div>

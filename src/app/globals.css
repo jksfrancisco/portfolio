@@ -10,68 +10,68 @@
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 217 91% 35%;
+    --primary: 348 83% 47%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 214 32% 97%;
+    --secondary: 348 20% 97%;
     --secondary-foreground: 222 47% 11%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 210 40% 96%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 47%;
+    --accent: 348 30% 96%;
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 35%;
+    --border: 348 20% 91%;
+    --input: 348 20% 91%;
+    --ring: 348 83% 47%;
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 220 30% 10%;
-    --foreground: 210 20% 88%;
-    --card: 220 25% 14%;
-    --card-foreground: 210 20% 88%;
-    --popover: 220 25% 14%;
-    --popover-foreground: 210 20% 88%;
-    --primary: 210 30% 45%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 20% 18%;
-    --secondary-foreground: 210 20% 88%;
-    --muted: 220 20% 18%;
-    --muted-foreground: 215 15% 60%;
-    --accent: 220 20% 20%;
-    --accent-foreground: 210 20% 88%;
+    --background: 0 0% 10%;
+    --foreground: 0 0% 88%;
+    --card: 0 0% 14%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 14%;
+    --popover-foreground: 0 0% 88%;
+    --primary: 348 70% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 88%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 88%;
     --destructive: 0 50% 40%;
-    --destructive-foreground: 210 20% 88%;
-    --border: 220 20% 22%;
-    --input: 220 20% 22%;
-    --ring: 210 30% 45%;
+    --destructive-foreground: 0 0% 88%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 348 70% 50%;
   }
 }
 
 /* Tech Grid Background */
 .tech-grid {
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(220, 20, 60, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 20, 60, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
 .dark .tech-grid {
   background-image:
-    linear-gradient(rgba(96, 165, 250, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96, 165, 250, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(220, 20, 60, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 20, 60, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
 /* Tech Dots Background */
 .tech-dots {
-  background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(220, 20, 60, 0.15) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
 .dark .tech-dots {
-  background-image: radial-gradient(rgba(96, 165, 250, 0.2) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(220, 20, 60, 0.2) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 

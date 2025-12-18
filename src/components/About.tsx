@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
 import { Code2, Rocket, Users, Zap } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image"
 
 const features = [
   {
@@ -104,22 +105,16 @@ export default function About() {
 
           <motion.div
             variants={itemVariants}
-            className="relative h-64 md:h-auto rounded-lg overflow-hidden border border-primary/30"
+            className="flex items-center justify-center"
           >
-            <div className="absolute inset-0 bg-primary/5 flex items-center justify-center">
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-                className="text-9xl font-bold text-primary"
-              >
-                JF
-              </motion.div>
+            <div className="relative w-full aspect-square max-w-md rounded-lg overflow-hidden border border-primary/30 bg-primary/5">
+              <Image
+                src="/asset/img/1761879662817.png"
+                alt="James Francisco - Profile"
+                fill
+                className="object-contain p-4"
+                priority
+              />
             </div>
           </motion.div>
         </motion.div>
