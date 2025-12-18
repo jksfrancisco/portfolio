@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "WebFetch(domain:portfolio-jksfrancisco.vercel.app)",
+      "WebFetch(domain:github.com)",
+      "Bash(yarn build:*)"
+    ]
+  }
+}

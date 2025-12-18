@@ -67,7 +67,7 @@ function SkillBar({ skill, delay }: { skill: { name: string; level: number }; de
           className="h-full bg-primary rounded-full"
           initial={{ width: 0 }}
           animate={{ width: `${width}%` }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" as const }}
         />
       </div>
     </div>
@@ -100,7 +100,7 @@ export default function Skills() {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: "easeOut" as const },
     },
   }
 
