@@ -58,7 +58,7 @@ export const safeVariants = <T extends Record<string, any>>(variants: T): T => {
     return {
       hidden: { opacity: 0 },
       visible: { opacity: 1 },
-    } as T
+    } as unknown as T
   }
   return variants
 }
