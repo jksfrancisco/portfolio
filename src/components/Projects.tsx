@@ -62,12 +62,37 @@ export default function Projects() {
     }
   }, [isInView, controls])
 
+  // Simplified entrance patterns for each project card
+  const getProjectVariants = (index: number) => {
+    const patterns = [
+      // Card 0: Slide from left
+      { hidden: { x: -40, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 1: Slide from bottom
+      { hidden: { y: 40, opacity: 0 }, visible: { y: 0, opacity: 1 } },
+      // Card 2: Slide from right
+      { hidden: { x: 40, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 3: Fade in + slight scale
+      { hidden: { scale: 0.95, opacity: 0 }, visible: { scale: 1, opacity: 1 } },
+      // Card 4: Slide from bottom
+      { hidden: { y: 40, opacity: 0 }, visible: { y: 0, opacity: 1 } },
+      // Card 5: Fade in + slight scale
+      { hidden: { scale: 0.95, opacity: 0 }, visible: { scale: 1, opacity: 1 } },
+    ]
+    return {
+      hidden: patterns[index % patterns.length].hidden,
+      visible: {
+        ...patterns[index % patterns.length].visible,
+        transition: { duration: 0.5, ease: "easeOut" as const },
+      },
+    }
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   }
@@ -113,7 +138,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              variants={itemVariants}
+              variants={getProjectVariants(index)}
             >
               <Card className="h-full flex flex-col overflow-hidden border-l-4 border-l-primary">
                 <CardHeader>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion, useInView, useAnimation } from "framer-motion"
+import { motion, useInView, useAnimation, useScroll, useTransform } from "framer-motion"
 import { Code2, Rocket, Users, Zap } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
@@ -31,8 +31,17 @@ const features = [
 
 export default function About() {
   const ref = useRef(null)
+  const imageRef = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const controls = useAnimation()
+
+  // Image parallax effect (subtle)
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  })
+  const imageY = useTransform(scrollYProgress, [0, 1], [20, -20])
+  const imageRotate = useTransform(scrollYProgress, [0, 1], [-2, 2])
 
   useEffect(() => {
     if (isInView) {
@@ -40,12 +49,33 @@ export default function About() {
     }
   }, [isInView, controls])
 
+  // Varied card animations - subtle entrance effects
+  const getCardVariants = (index: number) => {
+    const variants = [
+      // Card 0: Slide from left
+      { hidden: { x: -50, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 1: Slide from right
+      { hidden: { x: 50, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 2: Slide from bottom
+      { hidden: { y: 50, opacity: 0 }, visible: { y: 0, opacity: 1 } },
+      // Card 3: Scale in
+      { hidden: { scale: 0.9, opacity: 0 }, visible: { scale: 1, opacity: 1 } },
+    ]
+    return {
+      hidden: variants[index].hidden,
+      visible: {
+        ...variants[index].visible,
+        transition: { duration: 0.5, ease: "easeOut" as const },
+      },
+    }
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   }
@@ -107,21 +137,28 @@ export default function About() {
             variants={itemVariants}
             className="flex items-center justify-center"
           >
-            <div
+            <motion.div
+              ref={imageRef}
+              style={{ y: imageY, rotate: imageRotate }}
               className="relative w-full aspect-square max-w-md rounded-lg overflow-hidden"
-              style={{
-                maskImage: 'linear-gradient(to bottom, black 60%, transparent 70%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 70%)'
-              }}
             >
-              <Image
-                src="/asset/img/1761879662817.png"
-                alt="James Francisco - Profile"
-                fill
-                className="object-contain p-4"
-                priority
-              />
-            </div>
+              <div
+                style={{
+                  maskImage: 'linear-gradient(to bottom, black 60%, transparent 70%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 70%)',
+                  height: '100%',
+                  width: '100%',
+                }}
+              >
+                <Image
+                  src="/asset/img/1761879662817.png"
+                  alt="James Francisco - Profile"
+                  fill
+                  className="object-contain p-4"
+                  priority
+                />
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -134,7 +171,7 @@ export default function About() {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              variants={itemVariants}
+              variants={getCardVariants(index)}
             >
               <Card className="h-full border-t-2 border-t-primary">
                 <CardHeader>

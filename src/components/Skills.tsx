@@ -45,6 +45,7 @@ const skillCategories = [
 
 function SkillBar({ skill, delay }: { skill: { name: string; level: number }; delay: number }) {
   const [width, setWidth] = useState(0)
+  const [counter, setCounter] = useState(0)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
 
@@ -52,6 +53,17 @@ function SkillBar({ skill, delay }: { skill: { name: string; level: number }; de
     if (isInView) {
       setTimeout(() => {
         setWidth(skill.level)
+        // Animate counter
+        const interval = setInterval(() => {
+          setCounter((prev) => {
+            if (prev >= skill.level) {
+              clearInterval(interval)
+              return skill.level
+            }
+            return prev + 2
+          })
+        }, 20)
+        return () => clearInterval(interval)
       }, delay)
     }
   }, [isInView, skill.level, delay])
@@ -60,14 +72,17 @@ function SkillBar({ skill, delay }: { skill: { name: string; level: number }; de
     <div ref={ref} className="mb-4">
       <div className="flex justify-between mb-2">
         <span className="text-sm font-medium">{skill.name}</span>
-        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+        <span className="text-sm text-muted-foreground">{counter}%</span>
       </div>
       <div className="h-2.5 bg-secondary rounded-full overflow-hidden">
         <motion.div
           className="h-full bg-primary rounded-full"
           initial={{ width: 0 }}
-          animate={{ width: `${width}%` }}
-          transition={{ duration: 1, ease: "easeOut" as const }}
+          animate={{
+            width: `${width}%`,
+            boxShadow: width === skill.level ? '0 0 10px hsl(var(--primary))' : 'none'
+          }}
+          transition={{ duration: 1, ease: [0.6, 0.05, 0.01, 0.9] as const }}
         />
       </div>
     </div>
@@ -85,12 +100,33 @@ export default function Skills() {
     }
   }, [isInView, controls])
 
+  // Subtle entrance animations for category cards
+  const getSkillCardVariants = (index: number) => {
+    const positions = [
+      // Card 0: Slide from left
+      { hidden: { x: -30, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 1: Slide from right
+      { hidden: { x: 30, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 2: Slide from left
+      { hidden: { x: -30, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+      // Card 3: Slide from right
+      { hidden: { x: 30, opacity: 0 }, visible: { x: 0, opacity: 1 } },
+    ]
+    return {
+      hidden: positions[index].hidden,
+      visible: {
+        ...positions[index].visible,
+        transition: { duration: 0.5, ease: "easeOut" as const },
+      },
+    }
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.2,
       },
     },
   }
@@ -102,6 +138,20 @@ export default function Skills() {
       scale: 1,
       transition: { duration: 0.6, ease: "easeOut" as const },
     },
+  }
+
+  // Subtle wave animation for tech tags
+  const techTagVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: (i: number) => ({
+      scale: 1,
+      opacity: 1,
+      transition: {
+        delay: i * 0.03,
+        duration: 0.3,
+        ease: "easeOut" as const,
+      },
+    }),
   }
 
   return (
@@ -134,7 +184,7 @@ export default function Skills() {
           className="grid md:grid-cols-2 gap-8"
         >
           {skillCategories.map((category, categoryIndex) => (
-            <motion.div key={category.category} variants={itemVariants}>
+            <motion.div key={category.category} variants={getSkillCardVariants(categoryIndex)}>
               <Card className="h-full border-t-2 border-t-primary">
                 <CardHeader>
                   <div className="h-1.5 w-20 bg-primary rounded-full mb-4" />
@@ -181,9 +231,10 @@ export default function Skills() {
               ].map((tech, index) => (
                 <motion.span
                   key={tech}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                  variants={techTagVariants}
+                  initial="hidden"
+                  animate={controls}
+                  custom={index}
                   className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-sm font-medium"
                 >
                   {tech}
